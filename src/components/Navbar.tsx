@@ -37,7 +37,7 @@ const Navbar = ({indentType, setIndentType}: NavbarProps) => {
     setIndentType(-1)
   }
   return (
-    <div className='Navbar h-full lg:min-w-[350px] shadow-navbar-left'>
+    <div className='Navbar h-full 2xl:min-w-[350px] shadow-navbar-left'>
         <div className='Navbar-header flex justify-center w-full h-[100px] pt-1 pb-1 bg-[#3B82F6]'>
             <img src={NavbarHeaderLogo} className=''></img>
         </div>
