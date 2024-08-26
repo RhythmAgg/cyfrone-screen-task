@@ -4,37 +4,21 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
 import ButtonsList from './ButtonsList';
+import { StatusList as indentList } from '../Contants';
 
 const buttonsLists: string[] = [
     "indent-list",
     "order-request-list",
     "purchase-order-list"
 ]
-const indentList: string[] = [
-    'Draft',
-    "Auto",
-    "Raised",
-    "Approved by HOD",
-    "Issue by Stores",
-    "History"
-]
-const orderRequestList: string[] = [
-    'Draft',
-    "Auto",
-    "Raised",
-    "Approved by HOD",
-    "Issue by Stores",
-    "History"
-]
-const purchaseOrderList: string[] = [
-    'Draft',
-    "Auto",
-    "Raised",
-    "Approved by HOD",
-    "Issue by Stores",
-    "History"
-]
-const Navbar = () => {
+const orderRequestList: string[] = indentList
+const purchaseOrderList: string[] = indentList
+
+type NavbarProps = {
+    indentType: number;
+    setIndentType: React.Dispatch<React.SetStateAction<number>>;
+}
+const Navbar = ({indentType, setIndentType}: NavbarProps) => {
   const [show, setShow] = useState(0);
   const selectedClass:string = "text-white w-full pt-2 pb-2 ps-4 pe-4 cursor-pointer flex justify-between bg-[#3B82F6] rounded"
   const nonSelectedClass:string = "text-[#3B82F6] w-full pt-2 pb-2 ps-4 pe-4 cursor-pointer flex justify-between bg-[#EBF3FE] rounded"
@@ -50,6 +34,7 @@ const Navbar = () => {
         }
     })
     setShow(listId)
+    setIndentType(-1)
   }
   return (
     <div className='Navbar h-full lg:min-w-[350px] shadow-navbar-left'>
@@ -70,7 +55,7 @@ const Navbar = () => {
                         :<ArrowDropUpIcon />
                     }
                 </div>
-                <ButtonsList list={indentList} elementId = 'indent-list' hidden={false} />
+                <ButtonsList list={indentList} elementId = 'indent-list' hidden={false} setIndentType={setIndentType} />
             </div>
             <div className='order-request-container flex flex-col'>
                 <div className={`button-order-request ${show == 1?selectedClass:nonSelectedClass}`}
@@ -86,7 +71,7 @@ const Navbar = () => {
                     }
                     
                 </div>
-                <ButtonsList list={orderRequestList} elementId = 'order-request-list' hidden={true} />
+                <ButtonsList list={orderRequestList} elementId = 'order-request-list' hidden={true} setIndentType={setIndentType}/>
             </div>
             <div className='purchase-order-container flex flex-col'>
                 <div className={`button-purchase-order ${show == 2?selectedClass:nonSelectedClass}`}
@@ -101,7 +86,7 @@ const Navbar = () => {
                         :<ArrowDropUpIcon />
                     }
                 </div>
-                <ButtonsList list={purchaseOrderList} elementId = 'purchase-order-list' hidden={true} />
+                <ButtonsList list={purchaseOrderList} elementId = 'purchase-order-list' hidden={true} setIndentType={setIndentType} />
             </div>
             
         </div>

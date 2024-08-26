@@ -5,14 +5,17 @@ type ButtonsListProps = {
     list: string[];
     elementId: string;
     hidden: true | false;
+    setIndentType: React.Dispatch<React.SetStateAction<number>>;
 }
-const ButtonsList = ({list, elementId, hidden}: ButtonsListProps) => {
+const ButtonsList = ({list, elementId, hidden, setIndentType}: ButtonsListProps) => {
   return (
     <div className={`${elementId} ${hidden == true?'hidden':''} flex flex-col ps-0 text-[#3B82F6]`} >
         {
-            list.map((listItem: string) => {
+            list.map((listItem: string, idx: number) => {
                 return (
-                    <div className='p-1 m-2 hover:bg-[#C2DAFE] rounded cursor-pointer'>
+                    <div className='p-1 m-2 hover:bg-[#C2DAFE] rounded cursor-pointer'
+                        onClick={(e) => setIndentType(idx)}
+                    >
                         <ArrowRightRoundedIcon />
                         <span>{listItem}</span>
                     </div>

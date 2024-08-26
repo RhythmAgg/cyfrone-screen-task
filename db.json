@@ -1,0 +1,60 @@
+{
+    "indents": [
+        {
+            "ID": "#ZUI008",
+            "Date": "22/04/2024 9.15am",
+            "Kitchen": "Hot Kitchen",
+            "No. of Items": 51,
+            "Raised By": "Srikanth",
+            "Status": "Issued by Store"
+        },
+        {
+            "ID": "#ZUI009",
+            "Date": "22/04/2024 9.15am",
+            "Kitchen": "Hot Kitchen",
+            "No. of Items": 51,
+            "Raised By": "Srikanth",
+            "Status": "Approved by HOD"
+        },
+        {
+            "ID": "#ZUI010",
+            "Date": "22/04/2024 9.15am",
+            "Kitchen": "Hot Kitchen",
+            "No. of Items": 51,
+            "Raised By": "Srikanth",
+            "Status": "Issued by Store"
+        },
+        {
+            "ID": "#ZUI011",
+            "Date": "22/04/2024 9.15am",
+            "Kitchen": "Hot Kitchen",
+            "No. of Items": 51,
+            "Raised By": "Srikanth",
+            "Status": "Approved by HOD"
+        },
+        {
+            "ID": "#ZUI012",
+            "Date": "22/04/2024 9.15am",
+            "Kitchen": "Hot Kitchen",
+            "No. of Items": 51,
+            "Raised By": "Srikanth",
+            "Status": "Raised"
+        },
+        {
+            "ID": "#ZUI013",
+            "Date": "22/04/2024 9.15am",
+            "Kitchen": "Hot Kitchen",
+            "No. of Items": 51,
+            "Raised By": "Srikanth",
+            "Status": "Approved by HOD"
+        },
+        {
+            "ID": "#ZUI014",
+            "Date": "22/04/2024 9.15am",
+            "Kitchen": "Hot Kitchen",
+            "No. of Items": 51,
+            "Raised By": "Srikanth",
+            "Status": "Draft"
+        }
+    ]
+}
