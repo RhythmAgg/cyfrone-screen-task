@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, html {
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+.shadow-navbar-left {
+  box-shadow: rgba(35, 184, 243, 0.247) 0px 20px 20px;
+}
