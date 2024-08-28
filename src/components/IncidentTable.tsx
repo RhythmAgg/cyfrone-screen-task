@@ -10,37 +10,61 @@ type TableRow = {
 }
 type TableProps = {
     data?: TableRow[] | TableRow;
-    indentType: number;
+    tabType: number;
+    rowId: string;
+    setRowId: React.Dispatch<React.SetStateAction<string>>;
 }
-const Table = ({indentType}: TableProps) => {
+const Table = ({tabType, rowId, setRowId}: TableProps) => {
     const [tableData, setTableData] = useState([])
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         setLoading(true)
         try{
-            if(indentType > -1 && indentType < StatusList.length)
+            if(tabType > -1 && tabType < StatusList.length)
             {
-                fetch(`${DB_API}/indents?Status=${StatusList[indentType]}`)
-                    .then((data: any) => data.json())
-                    .then((data: any) => {
-                        console.log(data)
-                        setTableData(data)
-                        setLoading(false)
-                    })
+                if(rowId !== '')
+                {
+                    console.log(`${rowId}`, `${DB_API}/indents?Status=${StatusList[tabType]}&&ID=${rowId}`)
+                    fetch(`${DB_API}/indents?Status=${StatusList[tabType]}&&ID=${rowId}`)
+                        .then((data: any) => data.json())
+                        .then((data: any) => {
+                            console.log(data)
+                            setTableData(data)
+                            setLoading(false)
+                        })
+                }
+                else{
+                    fetch(`${DB_API}/indents?Status=${StatusList[tabType]}`)
+                        .then((data: any) => data.json())
+                        .then((data: any) => {
+                            setTableData(data)
+                            setLoading(false)
+                        })
+                }
             }else{
-                fetch(`${DB_API}/indents`)
-                    .then((data: any) => data.json())
-                    .then((data: any) => {
-                        console.log(data)
-                        setTableData(data)
-                        setLoading(false)
-                    })
+                if(rowId !== '')
+                {
+                    fetch(`${DB_API}/indents?ID=${rowId}`)
+                        .then((data: any) => data.json())
+                        .then((data: any) => {
+                            setTableData(data)
+                            setLoading(false)
+                        })
+                }
+                else{
+                    fetch(`${DB_API}/indents`)
+                        .then((data: any) => data.json())
+                        .then((data: any) => {
+                            setTableData(data)
+                            setLoading(false)
+                        })
+                }
             }
         }catch(err) {
             console.log('Error in loading data', err)
             setLoading(false)
         }
-    }, [indentType])
+    }, [tabType, rowId])
   return (
     <div className='Table flex flex-col'>
         <div className='text-white table-header-row bg-[#3B82F6] p-1 mb-1 flex flex-row'>
@@ -74,12 +98,12 @@ const Table = ({indentType}: TableProps) => {
                 else
                     color = '#EBF3FE'
                 const statusColor = StatusList.indexOf(row?.Status)
-                console.log(statusColor)
                 return (
-                    <div className={`table-row-element p-1 mt-1 rounded flex flex-row items-center`}
+                    <div className={`table-row-element p-1 mt-1 rounded flex flex-row items-center cursor-pointer hover:scale-[1.03] hover:border-[1px] hover:border-blue-500`}
                         style={{
                             backgroundColor: color
                         }}
+                        onClick={e => setRowId(row?.ID)}
                     >
                         <div className='w-[10%] p-1 text-center'>
                             <span>{row?.ID}</span>

@@ -15,10 +15,13 @@ const orderRequestList: string[] = indentList
 const purchaseOrderList: string[] = indentList
 
 type NavbarProps = {
-    indentType: number;
-    setIndentType: React.Dispatch<React.SetStateAction<number>>;
+    tabType: number;
+    setTabType: React.Dispatch<React.SetStateAction<number>>;
+    setTabName: React.Dispatch<React.SetStateAction<string>>;
+    rowId: string;
+    setRowId: React.Dispatch<React.SetStateAction<string>>;
 }
-const Navbar = ({indentType, setIndentType}: NavbarProps) => {
+const Navbar = ({tabType, setTabType, setTabName, rowId, setRowId}: NavbarProps) => {
   const [show, setShow] = useState(0);
   const selectedClass:string = "text-white w-full pt-2 pb-2 ps-4 pe-4 cursor-pointer flex justify-between bg-[#3B82F6] rounded"
   const nonSelectedClass:string = "text-[#3B82F6] w-full pt-2 pb-2 ps-4 pe-4 cursor-pointer flex justify-between bg-[#EBF3FE] rounded"
@@ -34,7 +37,7 @@ const Navbar = ({indentType, setIndentType}: NavbarProps) => {
         }
     })
     setShow(listId)
-    setIndentType(-1)
+    setTabType(-1)
   }
   return (
     <div className='Navbar h-full 2xl:min-w-[350px] shadow-navbar-left'>
@@ -42,7 +45,10 @@ const Navbar = ({indentType, setIndentType}: NavbarProps) => {
             <img src={NavbarHeaderLogo} className=''></img>
         </div>
         <div className='Navar-body p-6 flex flex-col gap-y-4'>
-            <div className='indent-container flex flex-col'>
+            <div className='indent-container flex flex-col' onClick={e => {
+                setTabName('Indent')
+                setRowId('')
+            }}>
                 <div className={`button-indent ${show == 0?selectedClass:nonSelectedClass}`}
                     onClick={(e) => toggleList(show !== 0?0:-1)}
                 >
@@ -55,9 +61,12 @@ const Navbar = ({indentType, setIndentType}: NavbarProps) => {
                         :<ArrowDropUpIcon />
                     }
                 </div>
-                <ButtonsList list={indentList} elementId = 'indent-list' hidden={false} setIndentType={setIndentType} />
+                <ButtonsList list={indentList} elementId = 'indent-list' hidden={false} setTabType={setTabType} />
             </div>
-            <div className='order-request-container flex flex-col'>
+            <div className='order-request-container flex flex-col' onClick={e => {
+                setTabName('MVP Order Requests')
+                setRowId('')
+            }}>
                 <div className={`button-order-request ${show == 1?selectedClass:nonSelectedClass}`}
                     onClick={(e) => toggleList(show !== 1?1:-1)}
                 >
@@ -71,9 +80,12 @@ const Navbar = ({indentType, setIndentType}: NavbarProps) => {
                     }
                     
                 </div>
-                <ButtonsList list={orderRequestList} elementId = 'order-request-list' hidden={true} setIndentType={setIndentType}/>
+                <ButtonsList list={orderRequestList} elementId = 'order-request-list' hidden={true} setTabType={setTabType}/>
             </div>
-            <div className='purchase-order-container flex flex-col'>
+            <div className='purchase-order-container flex flex-col' onClick={e => {
+                setTabName('Purchase Orders')
+                setRowId('')
+            }}>
                 <div className={`button-purchase-order ${show == 2?selectedClass:nonSelectedClass}`}
                     onClick={(e) => toggleList(show !== 2?2:-1)}
                 >
@@ -86,7 +98,7 @@ const Navbar = ({indentType, setIndentType}: NavbarProps) => {
                         :<ArrowDropUpIcon />
                     }
                 </div>
-                <ButtonsList list={purchaseOrderList} elementId = 'purchase-order-list' hidden={true} setIndentType={setIndentType} />
+                <ButtonsList list={purchaseOrderList} elementId = 'purchase-order-list' hidden={true} setTabType={setTabType} />
             </div>
             
         </div>
